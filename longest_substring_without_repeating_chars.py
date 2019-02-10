@@ -14,4 +14,4 @@ class Solution(object):
 
 if __name__=="__main__":
     long_sub=Solution()
-    print(long_sub.lengthOfLongestSubstring(""))
+    print(long_sub.lengthOfLongestSubstring(" "))
