@@ -19,7 +19,10 @@ class Solution(object):
             else:
                 break
         if index==len(s):
-            return True
+            if index==len(p):
+                return True
+            else:
+                return False
         str_index=index
         j_=str_index
         traversed=False
@@ -42,9 +45,12 @@ class Solution(object):
                         if s[k]!=_char:
                             break
                         str_index+=1
-                if p[j_].isalpha()==1:
-                    #handle for alpha neding and nit
-                    return False
+
+                #if p[j_].isalpha()==1:
+                    #if p[j_+1]=="*":
+                    #    pass
+                    #else:
+                    #    return False
                 j_+=1
         if traversed==True:
             ei_p=len(p)-1
@@ -62,7 +68,29 @@ class Solution(object):
         else:
             return False
 
+"""
+class Solution(object):
+    def isMatch(self, text, pattern):
+        memo = {}
+        def dp(i, j):
+            if (i, j) not in memo:
+                if j == len(pattern):
+                    ans = i == len(text)
+                else:
+                    first_match = i < len(text) and pattern[j] in {text[i], '.'}
+                    if j+1 < len(pattern) and pattern[j+1] == '*':
+                        ans = dp(i, j+2) or first_match and dp(i+1, j)
+                    else:
+                        ans = first_match and dp(i+1, j+1)
+
+                memo[i, j] = ans
+            return memo[i, j]
+
+        return dp(0, 0) 
+
+"""
+
 
 if __name__=="__main__":
     s=Solution()
-    print(s.isMatch("aab", "c*a*b"))
+    print(s.isMatch("aaa", "aaaa"))
