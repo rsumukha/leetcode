@@ -7,12 +7,11 @@ class Node {
 		value=v;
 		left=right=null;
 	}
-}
-//
-//	//class count{
-//		int count=0;
-//	}
-	
+}	
+	class count{
+		int count=0;
+	}
+
 	class sum{
 		int sum=0;
 	}
