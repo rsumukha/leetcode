@@ -1,26 +1,26 @@
 class Solution(object):
     def threeSum(self, nums):
+        if len(nums)<3:
+            return None
         nums.sort()
-        print(nums)
         ans=[]
-        for index in range(len(nums)):
-            l=index+1
-            r=len(nums)-1
-            while(l<r):
-                if nums[index]+nums[l]+nums[r]==0:
-                    print(index, l, r)
-                    ans.append([nums[index], nums[l], nums[r]])
-                    while(l<r and nums[l]==nums[l+1]):
-                        l+=1
-                    while(l<r and nums[r]==nums[r-1]):
-                        r-=1
-                if nums[index]+nums[l]+nums[r]>0:
-                    l+=1
-                if nums[index]+nums[l]+nums[r]<0:
-                    r-=1
-                else:
-                    l+=1
-                    r-=1
+        for i in range(len(nums)):
+            j=i+1
+            k=len(nums)-1
+            while(j<k):
+                if nums[i]+nums[j]+nums[k]==0:
+                    ans.append([nums[i], nums[j], nums[k]])
+                while j==j+1:
+                    j+=1
+                while k==k-1:
+                    k-=1
+                while nums[i]+nums[j]+nums[k]<0 and j<k:
+                    j+=1
+                while nums[i]+nums[j]+nums[k]>0 and j<k:
+                    k-=1
+                j+=1
+                k-=1
+
 
         return ans
 
