@@ -22,6 +22,7 @@ import java.util.*;
 public class MaxAvegNaryTree {
 	ComponentNode root;
 	HashMap<Integer, AvgAtt> hm=new HashMap<Integer, AvgAtt>();
+
 	AvgAtt calculateAvg(ComponentNode root) {		
 		if (root.components.size()==0) {
 			//hm.put(root.value, new AvgAtt(1,root.value));
