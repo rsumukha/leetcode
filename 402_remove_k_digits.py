@@ -6,35 +6,30 @@ class Solution(object):
         :type k: int
         :rtype: str
         """
-        stack=collections.deque()
+        if len(num)==0:
+            return None
+        stack=[]
+        stack.append(num[0])
         top=0
-        loc_max=-1
-        while i<len(num) and k>0:
+        for i in range(1, len(num)):
+            print(stack, num[i])
+            if stack[top]>num[i] or k==0:
+                while k>0 and top>=0 and stack[top]>num[i]:
+                    stack.pop()
+                    top-=1
+                    k-=1
+            stack.append(num[i])
+            top+=1
+        while k>0:
+            stack.pop()
+            k-=1
 
-            if num[i]<num[i+1]:
-                stack.append(num[i])
-                loc_max=max(loc_max, int(num[i])
-
-            elif num[i]>loc_max:
-                k-=1
-            
-            i+=1
+        return "".join(stack)
 
 
-        if i==len(num)-1 and k>0:
-            while k>0:
-                stack.pop()
-
-        for i in range(len(stack)):
-            ret_num.append(stack.popleft())
-
-        if len(ret_num)==0:
-            return 0
-        return int("".join(ret_num))
-            
         
 
 
 if __name__=="__main__":
     s=Solution()
-    print(s.removeKdigits("1432219"))
+    print(s.removeKdigits("1111111", 3))
