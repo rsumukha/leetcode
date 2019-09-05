@@ -14,7 +14,6 @@ class Solution(object):
             for j in range(0, i+1):
                 if nums[j]<nums[i]:
                     dp_array[i]=max(dp_array[j]+1, dp_array[i])
-
         return max(dp_array)
 
 

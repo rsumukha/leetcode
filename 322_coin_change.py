@@ -15,7 +15,7 @@ class Solution:
                 print(cur_amount, coin)
                 print(dp_array)
                 if cur_amount-coin>=0:
-                    print("inside if")
+                    # print("inside if")
                     dp_array[cur_amount] =min(dp_array[cur_amount], dp_array[cur_amount-coin]+1)
         return dp_array[amount]
         
