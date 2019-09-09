@@ -24,10 +24,7 @@ class Solution(object):
             stack.pop()
             k-=1
 
-        return "".join(stack)
-
-
-        
+        return "".join(stack)       
 
 
 if __name__=="__main__":
