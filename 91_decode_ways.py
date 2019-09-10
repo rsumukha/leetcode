@@ -19,14 +19,7 @@ class Solution(object):
             if one>0:
                 dp_array[i+1] += dp_array[i]
             if two>=10 and two<=26:
-                dp_array[i+1] += dp_array[i-1]
-        print(dp_array)
-                
-        return dp_array[len(s)]
-            
-            
-
-
+                dp_array[i+1] += dp_array[i-1]                
 
         print(dp_array)
         return dp_array[len(s)]
