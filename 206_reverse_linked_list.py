@@ -11,30 +11,38 @@ class Solution(object):
         :rtype: ListNode
         """
         self.nonrecursiveSol(head)
-        self.recursiveSol(temp)
-
-
+        self.recursiveSol(head)
 
     def nonrecursiveSol(self, head):
-    	temp=head
+        temph=head
+        temp=None
+        while head!=None:
+            head=head.next
+            temph.next=temp
+            temp=temph
+            temph=head
+        return temp
 
 
-    	while temp.next!=None:
-    		head=head.next
+    def rec(self, head):
+        if head==None or head.next==None:
+            return head
+        p= self.rec(head.next)
+        head.next.next=head
+        head.next=None
+        return p
 
-
-    		temp=temp.next
-
-
-    def recursiveSol(self, head):
+    def rec(self, head):
+        if head.next.next==None:
+            head.next.next=head
+            return head
+        else:
+            head=self.rec(head.next)
+        return head
 
         
 
 
-
-
-
-
 if __name__=="__main__":
-	s=Solution()
-	print(s.reverseList())
+    s=Solution()
+    print(s.reverseList())
