@@ -24,7 +24,7 @@ class Solution(object):
         return temp
 
 
-    def rec(self, head):
+    def recursiveSol(self, head):
         if head==None or head.next==None:
             return head
         p= self.rec(head.next)
@@ -32,13 +32,6 @@ class Solution(object):
         head.next=None
         return p
 
-    def rec(self, head):
-        if head.next.next==None:
-            head.next.next=head
-            return head
-        else:
-            head=self.rec(head.next)
-        return head
 
         
 
