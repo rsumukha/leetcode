@@ -1,63 +1,36 @@
 class Solution(object):
     def longestPalindrome(self, s):
-        p=[[0 for i in range(len(s)) ] for j in range(len(s))]
-        #print(len(s))
-        for x in range(len(s)):
-            #print(x)
-            p[x][x]=1
-
-        i=0
-        j=1
-        length_lps=1
-        index=0
-        while(i<(len(s)-1)):
-            if s[i]==s[j]:
-                p[i][j]=1
-                length_lps=j+1
-                index=i
-            else:
-                p[i][j]=0
-            i+=1
-            j+=1
-        length=2
-
-        while(length<=len(s)-1):
-            #print(length)
-            j=length
-            i=0
-            if length==7:
-                pass
-                #print(i, length)
-            while(i<=(len(s)-1) and j<=len(s)-1):
-                #print(p[i+1][j-1])
-
-                if p[i+1][j-1]==1:
-
-                    if s[i]==s[j]:
-                        #print(s[i], s[j])
-                        p[i][j]=1
-                        index=i
-                        length_lps=j+1
-                    else:
-                        p[i][j]=0
-                else:
-                    p[i][j]=0
-                i+=1
-                j+=1
-            length+=1
-
-        #print(length_lps)
-        print(index)
+        """
+        :type s: str
+        :rtype: str
+        """
+        if len(s)==0 or len(s)==1:
+            return s
+        
+        dp_array=[[0 for _ in range(len(s))] for _ in range(len(s))]
+        
         for i in range(len(s)):
-            print(p[i])
-        return s[index:length_lps]
+            dp_array[i][i]=1
+            
+        maxlen=1
+        startindex=0
+        endindex=0
+        for width in range(1, len(s)):
+            i=0
+            j=i+width
+            while i<len(s) and j<len(s):
+            
+                if (width==1 or dp_array[i+1][j-1]) and  s[i] == s[j]:
+                    dp_array[i][j] = 1   
+                    if (j - i +1) > maxlen:
+                        maxlen = j - i +1
+                        startindex=i
+                        endindex = j
+                else:
+                    dp_array[i][j]=0
 
-
-
-
-
-
-
-if __name__ == "__main__":
-    long_sub = Solution()
-    print(long_sub.longestPalindrome("cbba"))
+                i+=1
+                j=i+width
+                
+        return s[startindex: endindex+1]
+                
