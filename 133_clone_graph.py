@@ -7,7 +7,8 @@ class Node:
 """
 
 #YOU CAN REPRESENT GRAPH IN A DICTIONARY
-
+# BFS and DFS doesnt matter if you use stack/queue since the order doesnt matter, we process all its neighbors and add to s/q and process
+# immediatly or later, 
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
@@ -32,7 +33,16 @@ class Solution:
   
         return newnode_
                     
-
+    def dfs(self, node):
+        for child in node.neighbors:
+            if self.visited.get(child, 0):
+                self.visited[node].neighbors.append(self.visited[child])
+            else:
+                newnode = Node(child.val, [])
+                self.visited[child] = newnode
+                self.visited[node].neighbors.append(newnode)
+                self.dfs(child)
+                
 
             
             
