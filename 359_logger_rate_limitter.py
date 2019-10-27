@@ -1,26 +1,33 @@
+
+#dictionary solution takes too much space and doesnt scale properly,  it blows up if too many messages come
+#make the program threadsafe by putting locks
+
 class Logger(object):
 
     def __init__(self):
-        """
-        Initialize your data structure here.
-        """
+        from collections import deque
         self.dictionary = {}
+        
+        # dictionary solution takes too much space
+        #self.dictionary = {}
         
 
     def shouldPrintMessage(self, timestamp, message):
-        """
-        Returns true if the message should be printed in the given timestamp, otherwise returns false.
-        If this method returns false, the message will not be printed.
-        The timestamp is in seconds granularity.
-        :type timestamp: int
-        :type message: str
-        :rtype: bool
-        """
+        for item in self.dictionary.keys():
+            if timestamp - self.dictionary[item] >= 10:
+                del self.dictionary[item]
+                
         if message in self.dictionary:
-            if timestamp - self.dictionary[message] < 10:
-                return False
+            return False
         self.dictionary[message] = timestamp
         return True
+        
+        
+        # if message in self.dictionary:
+        #     if timestamp - self.dictionary[message] < 10:
+        #         return False
+        # self.dictionary[message] = timestamp
+        # return True
             
         
 
