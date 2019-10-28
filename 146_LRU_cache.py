@@ -1,30 +1,64 @@
+
+class Node(object):
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+        self.next = None
+        self.prev = None
+        
 class LRUCache(object):
 
     def __init__(self, capacity):
-        self.cachequeue = collections.deque()
-        self.mydict = {}
+        self.head = Node(None, None)
+        self.tail = Node(None, None)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+        self.cache = {}
         self.maxcapacity = capacity
-        
-
+        self.currentqueuelength = 0
+ 
+    
     def get(self, key):
-        if self.mydict.get(key, None):
-            self.cachequeue.remove(key) # expensive if we are 
-            self.cachequeue.append(key)            
-            return self.mydict[key]
+        if key in self.cache:
+            # node = self.cache[key]
+            self.deletenode(self.cache[key])
+            self.addnode(self.cache[key])
+            return self.cache[key].value
         else:
             return -1
-        
+   
 
     def put(self, key, value):
-        if self.mydict.get(key, None):
-            self.mydict.pop(key, None)    
-            self.cachequeue.remove(key)
-        self.mydict[key] = value
-        self.cachequeue.append(key)
-        if len(self.cachequeue) > self.maxcapacity:
-            keytopop = self.cachequeue.popleft()
-            self.mydict.pop(keytopop, None)
-        return
+        if key in self.cache:            
+            self.deletenode(self.cache[key])
+            del self.cache[key]
+        self.cache[key] = Node(key,value)
+        self.addnode(self.cache[key])
+        if self.currentqueuelength > self.maxcapacity:
+            del self.cache[self.tail.prev.key]
+            self.deletenode(self.tail.prev)
+        return 
+    
+    def addnode(self, node):
+        tmpnode = self.head.next 
+        self.head.next = node
+        node.next = tmpnode
+        node.prev = self.head
+        tmpnode.prev = node
+        self.currentqueuelength += 1
+        
+    
+    def deletenode(self, nodetobedeleted):
+        prev = nodetobedeleted.prev
+        next = nodetobedeleted.next
+        prev.next = next
+        next.prev = prev
+        self.currentqueuelength -= 1
+            
+    
+            
+            
+        
             
         
 
