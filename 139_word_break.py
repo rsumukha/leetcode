@@ -5,6 +5,28 @@ class Solution(object):
         :type wordDict: List[str]
         :rtype: bool
         """
+         wordset = set(wordDict)
+        visited=set()
+
+        def dfs(word):
+            if word in visited:
+                return False
+            if word in wordset:
+                return True
+
+            for i in range(1, len(word)):
+                first = word[:i]
+                second = word[i:]
+
+                if first in wordset:
+                    if second in wordset:
+                        return True
+                    if dfs(second):
+                        return True
+            visited.add(word)
+            return False
+
+        return dfs(s)
               
         dp_array=[0]*(len(s)+1)
         dp_array[0]=1
